@@ -37,4 +37,5 @@ fun StartYourEngine() {
     val viewModel = viewModel<CViewModel>()
     val state = viewModel.state
     val buttonSpacing = 7.dp
+    CFrontEnd(state = viewModel.state, onAction = (CAction) -> Unit)
 }

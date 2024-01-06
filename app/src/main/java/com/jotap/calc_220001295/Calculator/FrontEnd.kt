@@ -12,22 +12,26 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jotap.calc_220001295.ui.theme.MyBlue1
+import com.jotap.calc_220001295.ui.theme.MyBlue2
+import com.jotap.calc_220001295.ui.theme.MyBlue4
 
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun CFrontEnd (
+fun CFrontEnd(
 
     state: CState,
     modifier: Modifier = Modifier,
-    bottonSpacing: Dp = 7.dp
+    bottonSpacing: Dp = 7.dp,
+    onAction: (CAction) -> Unit
 
 ) {
     Box(
@@ -38,8 +42,8 @@ fun CFrontEnd (
             modifier = Modifier
                 .fillMaxSize()
                 .align(Alignment.BottomCenter),
-            verticalArrangement = Arrangement.spacedBy(7.dp), //devia levar a variavel buttonSpacing
-        ){
+            verticalArrangement = Arrangement.spacedBy(bottonSpacing),
+        ) {
             Text(
                 text = state.val_number1 + (state.operation ?: "") + state.val_number2,
                 textAlign = TextAlign.End,
@@ -51,24 +55,80 @@ fun CFrontEnd (
                 maxLines = 2
             )
             Row(
-               modifier = Modifier
-                   .fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(7.dp)
-            ){
-              CButton(
-                  symbol = "AC",
-                  modifier = Modifier
-                      .background(MyBlue1)
-                      .aspectRatio(1f)
-                      .weight(2f),
-                  onClick = {
-                      onAction(CAction.Clear)
-                  }
-              ) {
-
-              }
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(bottonSpacing)
+            ) {
+                CButton(symbol = "AC",
+                    modifier = Modifier
+                        .background(MyBlue4)
+                        .aspectRatio(1f)
+                        .weight(2f),
+                    onClick = {
+                        onAction(CAction.Clear)
+                    })
+                CButton(symbol = "Del",
+                    modifier = Modifier
+                        .background(MyBlue1)
+                        .aspectRatio(1f)
+                        .weight(2f),
+                    onClick = {
+                        onAction(CAction.Delete)
+                    })
+                CButton(symbol = "%",
+                    modifier = Modifier
+                        .background(MyBlue1)
+                        .aspectRatio(1f)
+                        .weight(2f),
+                    onClick = {
+                        onAction(CAction.Percentage)
+                    })
+                CButton(symbol = "/",
+                    modifier = Modifier
+                        .background(MyBlue1)
+                        .aspectRatio(1f)
+                        .weight(2f),
+                    onClick = {
+                        onAction(CAction.Operation(COperation.Divide))
+                    })
             }
-    }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(bottonSpacing)
+            ) {
+                CButton(symbol = "7",
+                    modifier = Modifier
+                        .background(MyBlue2)
+                        .aspectRatio(1f)
+                        .weight(1f),
+                    onClick = {
+                        onAction(CAction.Number(7))
+                    })
+                CButton(symbol = "8",
+                    modifier = Modifier
+                        .background(MyBlue2)
+                        .aspectRatio(1f)
+                        .weight(1f),
+                    onClick = {
+                        onAction(CAction.Number(8))
+                    })
+                CButton(symbol = "9",
+                    modifier = Modifier
+                        .background(MyBlue2)
+                        .aspectRatio(1f)
+                        .weight(1f),
+                    onClick = {
+                        onAction(CAction.Number(9))
+                    })
+                CButton(symbol = "*",
+                    modifier = Modifier
+                        .background(MyBlue1)
+                        .aspectRatio(1f)
+                        .weight(2f),
+                    onClick = {
+                        onAction(CAction.Operation(COperation.Multiply))
+                    })
+            }
+        }
 
     }
 }
