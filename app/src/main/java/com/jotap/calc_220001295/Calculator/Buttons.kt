@@ -28,7 +28,7 @@ fun CButton(
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
-            .clip(RoundedCornerShape(100.dp))
+            .clip(RoundedCornerShape(16.dp))
             .background(color)
             .clickable {
                 onClick()

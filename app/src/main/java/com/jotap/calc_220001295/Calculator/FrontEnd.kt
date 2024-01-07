@@ -5,22 +5,28 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.jotap.calc_220001295.R
 import com.jotap.calc_220001295.ui.theme.MyBlue1
-import com.jotap.calc_220001295.ui.theme.MyBlue2
 import com.jotap.calc_220001295.ui.theme.MyBlue3
 import com.jotap.calc_220001295.ui.theme.MyBlue4
 
@@ -37,6 +43,7 @@ fun CFrontEnd(
 ) {
     Box(
         modifier = modifier
+            .padding(16.dp)
     ) {
         Column(
 
@@ -45,16 +52,34 @@ fun CFrontEnd(
                 .align(Alignment.BottomCenter),
             verticalArrangement = Arrangement.spacedBy(buttonSpacing),
         ) {
+            Spacer(modifier = Modifier.height(20.dp))
             Text(
-                text = state.val_number1 + (state.operation ?: "") + state.val_number2,
+                text = stringResource(id = R.string.theBest),
+                fontFamily = FontFamily.SansSerif,
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                color = MyBlue4,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(
+                        color= MyBlue3,
+                        shape = RoundedCornerShape(16.dp)
+                    )
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(
+                text = state.valueNumber1 + (state.operation ?: "") + state.valueNumber2,
                 textAlign = TextAlign.End,
                 modifier = Modifier
                     .fillMaxWidth()
+                    .height(200.dp)
                     .padding(vertical = 32.dp),
-                fontSize = 80.sp,
+                fontSize = 10.sp,
                 color = Color.White,
                 maxLines = 2
             )
+            Spacer(modifier = Modifier.height(20.dp))
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(buttonSpacing)
@@ -226,8 +251,8 @@ fun CFrontEnd(
                 CButton(symbol = "=",
                     modifier = Modifier
                         .background(MyBlue3)
-                        .aspectRatio(1f)
-                        .weight(1f),
+                        .aspectRatio(2f)
+                        .weight(2f),
                     onClick = {
                         onAction(CAction.Calculate)
                     })

@@ -22,30 +22,30 @@ class CViewModel : ViewModel() {
 
     private fun performDeletion() {
         when {
-            state.val_number2.isNotBlank() -> state =
-                state.copy(val_number2 = state.val_number2.dropLast(1))
+            state.valueNumber2.isNotBlank() -> state =
+                state.copy(valueNumber2 = state.valueNumber2.dropLast(1))
 
             state.operation != null -> state = state.copy(operation = null)
-            state.val_number1.isNotBlank() -> state =
-                state.copy(val_number1 = state.val_number2.dropLast(1))
+            state.valueNumber1.isNotBlank() -> state =
+                state.copy(valueNumber1 = state.valueNumber1.dropLast(1))
         }
     }
 
     private fun performCalculation() {
-        val val_number1 = state.val_number1.toDoubleOrNull()
-        val val_number2 = state.val_number2.toDoubleOrNull()
-        if(val_number1 != null && val_number2 != null) {
+        val valueNumber1 = state.valueNumber1.toDoubleOrNull()
+        val ValueNumber2 = state.valueNumber2.toDoubleOrNull()
+        if(valueNumber1 != null && ValueNumber2 != null) {
             val result = when(state.operation) {
-                is COperation.Add -> val_number1 + val_number2
-                is COperation.Subtract -> val_number1 - val_number2
-                is COperation.Multiply -> val_number1 * val_number2
-                is COperation.Divide -> val_number1 / val_number2
-                is COperation.Percentage -> val_number1 % val_number2
+                is COperation.Add -> valueNumber1 + ValueNumber2
+                is COperation.Subtract -> valueNumber1 - ValueNumber2
+                is COperation.Multiply -> valueNumber1 * ValueNumber2
+                is COperation.Divide -> valueNumber1 / ValueNumber2
+                is COperation.Percentage -> (valueNumber1 * ValueNumber2 / 100)
                 null -> return
             }
             state = state.copy(
-                val_number1 = result.toString(),//.take(15),
-                val_number2 = "",
+                valueNumber1 = result.toString(),//.take(15),
+                valueNumber2 = "",
                 operation = null
             )
         }
@@ -53,21 +53,21 @@ class CViewModel : ViewModel() {
     }
 
     private fun enterOperation(operation: COperation) {
-        if (state.val_number1.isNotBlank()) {
+        if (state.valueNumber1.isNotBlank()) {
             state = state.copy(operation = operation)
         }
     }
 
     private fun enterDecimal() {
-        if (state.operation == null && !state.val_number1.contains(".") && state.val_number1.isNotBlank()) {
+        if (state.operation == null && !state.valueNumber1.contains(".") && state.valueNumber1.isNotBlank()) {
             state = state.copy(
-                val_number1 = state.val_number1 + "."
+                valueNumber1 = state.valueNumber1 + "."
             )
             return
         }
-        if (state.operation == null && !state.val_number2.contains(".") && state.val_number2.isNotBlank()) {
+        if (state.operation == null && !state.valueNumber2.contains(".") && state.valueNumber2.isNotBlank()) {
             state = state.copy(
-                val_number1 = state.val_number2 + "."
+                valueNumber1 = state.valueNumber2 + "."
             )
             return
         }
@@ -76,16 +76,16 @@ class CViewModel : ViewModel() {
 
     private fun enterNumber(number: Int) {
         if (state.operation == null) {
-            if (state.val_number1.length >= MAX_NUM_LENGTH) {
+            if (state.valueNumber1.length >= MAX_NUM_LENGTH) {
                 return
             }
-            state = state.copy(val_number1 = state.val_number1 + number)
+            state = state.copy(valueNumber1 = state.valueNumber1 + number)
             return
         }
-        if (state.val_number2.length >= MAX_NUM_LENGTH) {
+        if (state.valueNumber2.length >= MAX_NUM_LENGTH) {
             return
         }
-        state = state.copy(val_number2 = state.val_number2 + number)
+        state = state.copy(valueNumber2 = state.valueNumber2 + number)
     }
 
     companion object {
