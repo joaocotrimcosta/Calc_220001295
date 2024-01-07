@@ -32,6 +32,23 @@ class CViewModel : ViewModel() {
     }
 
     private fun performCalculation() {
+        val val_number1 = state.val_number1.toDoubleOrNull()
+        val val_number2 = state.val_number2.toDoubleOrNull()
+        if(val_number1 != null && val_number2 != null) {
+            val result = when(state.operation) {
+                is COperation.Add -> val_number1 + val_number2
+                is COperation.Subtract -> val_number1 - val_number2
+                is COperation.Multiply -> val_number1 * val_number2
+                is COperation.Divide -> val_number1 / val_number2
+                is COperation.Percentage -> val_number1 % val_number2
+                null -> return
+            }
+            state = state.copy(
+                val_number1 = result.toString(),//.take(15),
+                val_number2 = "",
+                operation = null
+            )
+        }
 
     }
 

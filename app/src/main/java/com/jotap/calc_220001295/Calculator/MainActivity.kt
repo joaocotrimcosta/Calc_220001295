@@ -3,9 +3,9 @@ package com.jotap.calc_220001295.Calculator
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.jotap.calc_220001295.ui.theme.Calc_220001295Theme
+import com.jotap.calc_220001295.ui.theme.MyBlue2
 
 
 class MainActivity : ComponentActivity() {
@@ -22,8 +23,8 @@ class MainActivity : ComponentActivity() {
             Calc_220001295Theme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    //modifier = Modifier.fillMaxSize(),
+                    //color = MaterialTheme.colorScheme.background
                 ) {
                     StartYourEngine()
                 }
@@ -38,13 +39,14 @@ class MainActivity : ComponentActivity() {
 fun StartYourEngine() {
     val viewModel = viewModel<CViewModel>()
     val state = viewModel.state
-    val buttonSpacing = 7.dp
+    val buttonSpacing = 8.dp
     CFrontEnd(
         state = state,
         onAction = viewModel::onAction,
-        bottonSpacing = buttonSpacing,
+        buttonSpacing = buttonSpacing,
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(8.dp)
+            .background(color = MyBlue2)
     )
 }
