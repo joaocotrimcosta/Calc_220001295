@@ -98,4 +98,10 @@ class CViewModel : ViewModel() {
     companion object {
         private const val MAX_NUM_LENGTH = 8
     }
+
+    private fun checkEquals () {
+        if (state.clearFields) {
+            onAction(CAction.Clear)
+        }
+    }
 }

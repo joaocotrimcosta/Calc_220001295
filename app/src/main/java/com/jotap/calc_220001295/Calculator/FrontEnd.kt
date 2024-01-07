@@ -25,6 +25,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.jotap.calc_220001295.Calculator.COperation.Add.symbol
 import com.jotap.calc_220001295.R
 import com.jotap.calc_220001295.ui.theme.MyBlue1
@@ -280,6 +281,7 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
+                        //viewModel.checkEquals ()
                         if (state.clearFields) {
                             onAction(CAction.Clear)
                             CAction.Number(0).onAction()
