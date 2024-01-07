@@ -22,34 +22,34 @@ class CViewModel : ViewModel() {
 
     private fun performDeletion() {
         when {
-            state.valueNumber2.isNotBlank() -> state =
-                state.copy(valueNumber2 = state.valueNumber2.dropLast(1))
+            state.valueNumber2.isNotBlank() ->
+                state = state.copy(valueNumber2 = state.valueNumber2.dropLast(1))
 
             state.operation != null -> state = state.copy(operation = null)
-            state.valueNumber1.isNotBlank() -> state =
-                state.copy(valueNumber1 = state.valueNumber1.dropLast(1))
+
+            state.valueNumber1.isNotBlank() ->
+                state = state.copy(valueNumber1 = state.valueNumber1.dropLast(1))
         }
     }
 
     private fun performCalculation() {
         val valueNumber1 = state.valueNumber1.toDoubleOrNull()
-        val ValueNumber2 = state.valueNumber2.toDoubleOrNull()
-        if(valueNumber1 != null && ValueNumber2 != null) {
-            val result = when(state.operation) {
-                is COperation.Add -> valueNumber1 + ValueNumber2
-                is COperation.Subtract -> valueNumber1 - ValueNumber2
-                is COperation.Multiply -> valueNumber1 * ValueNumber2
-                is COperation.Divide -> valueNumber1 / ValueNumber2
-                is COperation.Percentage -> (valueNumber1 * ValueNumber2 / 100)
+        val valueNumber2 = state.valueNumber2.toDoubleOrNull()
+        if (valueNumber1 != null && valueNumber2 != null) {
+            val result = when (state.operation) {
+                is COperation.Add -> valueNumber1 + valueNumber2
+                is COperation.Subtract -> valueNumber1 - valueNumber2
+                is COperation.Multiply -> valueNumber1 * valueNumber2
+                is COperation.Divide -> valueNumber1 / valueNumber2
+                is COperation.Percentage -> (valueNumber1 * valueNumber2 / 100)
                 null -> return
             }
             state = state.copy(
-                valueNumber1 = result.toString(),//.take(15),
+                valueNumber1 = result.toString(),
                 valueNumber2 = "",
                 operation = null
             )
         }
-
     }
 
     private fun enterOperation(operation: COperation) {
@@ -67,11 +67,10 @@ class CViewModel : ViewModel() {
         }
         if (state.operation == null && !state.valueNumber2.contains(".") && state.valueNumber2.isNotBlank()) {
             state = state.copy(
-                valueNumber1 = state.valueNumber2 + "."
+                valueNumber2 = state.valueNumber2 + "."
             )
             return
         }
-
     }
 
     private fun enterNumber(number: Int) {
@@ -92,4 +91,3 @@ class CViewModel : ViewModel() {
         private const val MAX_NUM_LENGTH = 8
     }
 }
-

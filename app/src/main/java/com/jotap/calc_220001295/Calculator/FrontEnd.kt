@@ -25,6 +25,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.jotap.calc_220001295.Calculator.COperation.Add.symbol
 import com.jotap.calc_220001295.R
 import com.jotap.calc_220001295.ui.theme.MyBlue1
 import com.jotap.calc_220001295.ui.theme.MyBlue3
@@ -38,7 +39,7 @@ fun CFrontEnd(
     state: CState,
     modifier: Modifier = Modifier,
     buttonSpacing: Dp = 8.dp,
-    onAction: (CAction) -> Unit
+    onAction: CAction.() -> Unit
 
 ) {
     Box(
@@ -69,13 +70,13 @@ fun CFrontEnd(
             )
             Spacer(modifier = Modifier.height(20.dp))
             Text(
-                text = state.valueNumber1 + (state.operation ?: "") + state.valueNumber2,
+                text = state.valueNumber1 + (state.operation?.symbol ?: "") + state.valueNumber2,
                 textAlign = TextAlign.End,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(200.dp)
                     .padding(vertical = 32.dp),
-                fontSize = 10.sp,
+                fontSize = 70.sp,
                 color = Color.White,
                 maxLines = 2
             )
@@ -90,7 +91,7 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CAction.Clear)
+                        CAction.Clear.onAction()
                     })
                 CButton(symbol = "Del",
                     modifier = Modifier
@@ -98,7 +99,7 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CAction.Delete)
+                        CAction.Delete.onAction()
                     })
                 CButton(symbol = "%",
                     modifier = Modifier
@@ -106,7 +107,7 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CAction.Operation(COperation.Percentage))
+                        CAction.Operation(COperation.Percentage).onAction()
                     })
                 CButton(symbol = "/",
                     modifier = Modifier
@@ -114,7 +115,7 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CAction.Operation(COperation.Divide))
+                        CAction.Operation(COperation.Divide).onAction()
                     })
             }
             Row(
@@ -127,7 +128,7 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CAction.Number(7))
+                        CAction.Number(7).onAction()
                     })
                 CButton(symbol = "8",
                     modifier = Modifier
@@ -135,7 +136,7 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CAction.Number(8))
+                        CAction.Number(8).onAction()
                     })
                 CButton(symbol = "9",
                     modifier = Modifier
@@ -143,7 +144,7 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CAction.Number(9))
+                        CAction.Number(9).onAction()
                     })
                 CButton(symbol = "*",
                     modifier = Modifier
@@ -151,7 +152,7 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CAction.Operation(COperation.Multiply))
+                        CAction.Operation(COperation.Multiply).onAction()
                     })
             }
             Row(
@@ -164,7 +165,7 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CAction.Number(4))
+                        CAction.Number(4).onAction()
                     })
                 CButton(symbol = "5",
                     modifier = Modifier
@@ -172,7 +173,7 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CAction.Number(5))
+                        CAction.Number(5).onAction()
                     })
                 CButton(symbol = "6",
                     modifier = Modifier
@@ -180,7 +181,7 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CAction.Number(6))
+                        CAction.Number(6).onAction()
                     })
                 CButton(symbol = "-",
                     modifier = Modifier
@@ -188,7 +189,7 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CAction.Operation(COperation.Subtract))
+                        CAction.Operation(COperation.Subtract).onAction()
                     })
             }
             Row(
@@ -201,7 +202,7 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CAction.Number(1))
+                        CAction.Number(1).onAction()
                     })
                 CButton(symbol = "2",
                     modifier = Modifier
@@ -209,7 +210,7 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CAction.Number(2))
+                        CAction.Number(2).onAction()
                     })
                 CButton(symbol = "3",
                     modifier = Modifier
@@ -217,16 +218,17 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CAction.Number(3))
+                        CAction.Number(3).onAction()
                     })
-                CButton(symbol = "+",
+                CButton(
+                    symbol = "+",
                     modifier = Modifier
                         .background(MyBlue1)
                         .aspectRatio(1f)
-                        .weight(1f),
-                    onClick = {
-                        onAction(CAction.Operation(COperation.Add))
-                    })
+                        .weight(1f)
+                ) {
+                    CAction.Operation(COperation.Add).onAction()
+                }
             }
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -238,7 +240,7 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CAction.Number(0))
+                        CAction.Number(0).onAction()
                     })
                 CButton(symbol = ".",
                     modifier = Modifier
@@ -246,7 +248,7 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CAction.Decimal)
+                        CAction.Decimal.onAction()
                     })
                 CButton(symbol = "=",
                     modifier = Modifier
@@ -254,7 +256,7 @@ fun CFrontEnd(
                         .aspectRatio(2f)
                         .weight(2f),
                     onClick = {
-                        onAction(CAction.Calculate)
+                        CAction.Calculate.onAction()
                     })
 
             }
