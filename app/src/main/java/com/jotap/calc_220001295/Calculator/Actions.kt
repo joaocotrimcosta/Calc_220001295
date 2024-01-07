@@ -7,4 +7,5 @@ sealed class CAction {
     data class Operation(val operation: COperation): CAction()
     object Calculate: CAction()
     object Decimal: CAction()
+
 }

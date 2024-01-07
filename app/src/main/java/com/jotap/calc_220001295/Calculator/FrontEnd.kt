@@ -64,7 +64,7 @@ fun CFrontEnd(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(
-                        color= MyBlue3,
+                        color = MyBlue3,
                         shape = RoundedCornerShape(16.dp)
                     )
             )
@@ -80,12 +80,13 @@ fun CFrontEnd(
                 color = Color.White,
                 maxLines = 2
             )
+
             Spacer(modifier = Modifier.height(20.dp))
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(buttonSpacing)
             ) {
-                CButton(symbol = "AC",
+                    CButton(symbol = "AC",
                     modifier = Modifier
                         .background(MyBlue4)
                         .aspectRatio(1f)
@@ -128,7 +129,11 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        CAction.Number(7).onAction()
+                        if (state.clearFields) {
+                            onAction(CAction.Clear)
+                            CAction.Number(7).onAction()
+                        } else
+                            CAction.Number(7).onAction()
                     })
                 CButton(symbol = "8",
                     modifier = Modifier
@@ -136,7 +141,12 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        CAction.Number(8).onAction()
+                        if (state.clearFields) {
+                            onAction(CAction.Clear)
+                            CAction.Number(8).onAction()
+                        } else
+                            CAction.Number(8).onAction()
+
                     })
                 CButton(symbol = "9",
                     modifier = Modifier
@@ -144,7 +154,13 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        CAction.Number(9).onAction()
+                        if (state.clearFields) {
+                            onAction(CAction.Clear)
+                            CAction.Number(9).onAction()
+                        } else
+                            CAction.Number(9).onAction()
+
+
                     })
                 CButton(symbol = "*",
                     modifier = Modifier
@@ -165,7 +181,11 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        CAction.Number(4).onAction()
+                        if (state.clearFields) {
+                            onAction(CAction.Clear)
+                            CAction.Number(4).onAction()
+                        } else
+                            CAction.Number(4).onAction()
                     })
                 CButton(symbol = "5",
                     modifier = Modifier
@@ -173,7 +193,11 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        CAction.Number(5).onAction()
+                        if (state.clearFields) {
+                            onAction(CAction.Clear)
+                            CAction.Number(5).onAction()
+                        } else
+                            CAction.Number(5).onAction()
                     })
                 CButton(symbol = "6",
                     modifier = Modifier
@@ -181,7 +205,11 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        CAction.Number(6).onAction()
+                        if (state.clearFields) {
+                            onAction(CAction.Clear)
+                            CAction.Number(6).onAction()
+                        } else
+                            CAction.Number(6).onAction()
                     })
                 CButton(symbol = "-",
                     modifier = Modifier
@@ -202,7 +230,11 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        CAction.Number(1).onAction()
+                        if (state.clearFields) {
+                            onAction(CAction.Clear)
+                            CAction.Number(1).onAction()
+                        } else
+                            CAction.Number(1).onAction()
                     })
                 CButton(symbol = "2",
                     modifier = Modifier
@@ -210,7 +242,11 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        CAction.Number(2).onAction()
+                        if (state.clearFields) {
+                            onAction(CAction.Clear)
+                            CAction.Number(2).onAction()
+                        } else
+                            CAction.Number(2).onAction()
                     })
                 CButton(symbol = "3",
                     modifier = Modifier
@@ -218,7 +254,11 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        CAction.Number(3).onAction()
+                        if (state.clearFields) {
+                            onAction(CAction.Clear)
+                            CAction.Number(3).onAction()
+                        } else
+                            CAction.Number(3).onAction()
                     })
                 CButton(
                     symbol = "+",
@@ -240,7 +280,11 @@ fun CFrontEnd(
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        CAction.Number(0).onAction()
+                        if (state.clearFields) {
+                            onAction(CAction.Clear)
+                            CAction.Number(0).onAction()
+                        } else
+                            CAction.Number(0).onAction()
                     })
                 CButton(symbol = ".",
                     modifier = Modifier

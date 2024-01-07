@@ -13,7 +13,7 @@ class CViewModel : ViewModel() {
         when (action) {
             is CAction.Number -> enterNumber(action.number)
             is CAction.Decimal -> enterDecimal()
-            is CAction.Clear -> state = CState()
+            is CAction.Clear -> state = CState(clearFields = false)
             is CAction.Operation -> enterOperation(action.operation)
             is CAction.Calculate -> performCalculation()
             is CAction.Delete -> performDeletion()
@@ -47,8 +47,16 @@ class CViewModel : ViewModel() {
             state = state.copy(
                 valueNumber1 = result.toString(),
                 valueNumber2 = "",
+                operation = null,
+                clearFields = true
+            )
+            /*
+            state = state.copy(
+                valueNumber1 = "",
+                valueNumber2 = "",
                 operation = null
             )
+           */
         }
     }
 

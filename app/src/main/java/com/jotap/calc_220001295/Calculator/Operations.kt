@@ -6,4 +6,5 @@ sealed class COperation(val symbol: String) {
     object Multiply: COperation("x")
     object Divide: COperation("/")
     object Percentage: COperation("%")
+
 }
