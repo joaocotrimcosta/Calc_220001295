@@ -44,8 +44,13 @@ class CViewModel : ViewModel() {
                 is COperation.Percentage -> (valueNumber1 * valueNumber2 / 100)
                 null -> return
             }
+            val test = result.toString().take(10).endsWith(".0")
             state = state.copy(
-                valueNumber1 = result.toString(),
+                valueNumber1 = if (test) {
+                    result.toString().take(12).removeSuffix(".0")
+                } else {
+                    result.toString().take(10)
+                },
                 valueNumber2 = "",
                 operation = null,
                 clearFields = true

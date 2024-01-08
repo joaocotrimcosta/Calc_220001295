@@ -25,8 +25,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.jotap.calc_220001295.Calculator.COperation.Add.symbol
 import com.jotap.calc_220001295.R
 import com.jotap.calc_220001295.ui.theme.MyBlue1
 import com.jotap.calc_220001295.ui.theme.MyBlue3
@@ -54,7 +52,7 @@ fun CFrontEnd(
                 .align(Alignment.BottomCenter),
             verticalArrangement = Arrangement.spacedBy(buttonSpacing),
         ) {
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(10.dp))
             Text(
                 text = stringResource(id = R.string.theBest),
                 fontFamily = FontFamily.SansSerif,
@@ -69,17 +67,17 @@ fun CFrontEnd(
                         shape = RoundedCornerShape(16.dp)
                     )
             )
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(10.dp))
             Text(
                 text = state.valueNumber1 + (state.operation?.symbol ?: "") + state.valueNumber2,
                 textAlign = TextAlign.End,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(200.dp)
-                    .padding(vertical = 32.dp),
+                    .height(220.dp)
+                    .padding(vertical = 5.dp),
                 fontSize = 70.sp,
                 color = Color.White,
-                maxLines = 2
+                maxLines = 1
             )
 
             Spacer(modifier = Modifier.height(20.dp))
